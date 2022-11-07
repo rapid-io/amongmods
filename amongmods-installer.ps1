@@ -83,7 +83,7 @@ function downloadFile([string]$URL,[string]$destination) {
     $ProgressPreference = 'SilentlyContinue'
 
     try {
-        $WR = Invoke-WebRequest -Uri $URL -OutFile $destination -PassThru #-Verbose
+        $WR = Invoke-WebRequest -Uri $URL -OutFile $destination -PassThru -UseBasicParsing #-Verbose
         Write-Host "[DL]" $WR.RawContentLength "bytes received."
     }
     Catch {
