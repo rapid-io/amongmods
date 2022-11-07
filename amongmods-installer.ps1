@@ -1,23 +1,24 @@
-﻿###############################################################
-## 
-## Among Mods                                 Proof of Concept               
-##   Downloader for Town of us                        by rapid
-##   and Better Crew link
-                                     $version = '2022-11-07.1'
-##
-## 1) Locates and clones the installed Among Us
-## 2) Downloads 'Town of Us' from github and extracts it
-## 3) Creates a shortcut on desktop
-## 4) Optionally downloads and installs BetterCrewLink
-## 
-##
-###############################################################
-#
-# TODO:
-#     * Throw and Catch exceptions
-#
-###############################################################
+<#
+.SYNOPSIS
+ Proof of concept of  a downloader for Town of Us and Better Crew Link
 
+.DESCRIPTION
+ Tries to locate an installation of Among Us (Steam version only)
+ Checks for Town of Us and Better Crew Link and if needed, downloads them.
+ Clones the installed Among Us, adds the ToU mod, and creates a shortcut on desktop.
+ Optionally downloads and installs BetterCrewLink
+
+ To run directly from powershell, try:
+  Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1'))
+
+.NOTES
+ Version:        2022-11-07.1
+ Author:         rapid
+
+.LINK
+ https://github.com/rapid-io/amongmods
+#>
+$version = '2022-11-07.1'
 
 function showBanner() {
     Write-Host ""
