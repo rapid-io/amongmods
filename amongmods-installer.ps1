@@ -9,10 +9,10 @@
  Optionally downloads and installs BetterCrewLink
 
  To run directly from powershell, try either:
-  iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
-  or
   Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1'))
-
+ or
+  iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
+  
 .NOTES
  Version:        2022-11-07.1
  Author:         rapid
@@ -208,7 +208,7 @@ function installBCL($BCL) {
 
     Write-Host "[Better Crew Link] Download finished, installing."
     Start-Process $BCL.Filename
-    $confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file."
+    $confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file"
     Remove-Item $BCL.Filename -Force -Verbose
     Write-Host ""
     Write-Host "[Better Crew Link] Removed " $BCL.Filename
@@ -267,4 +267,4 @@ else {
 }
 
 Write-Host ""
-$confirmation = Read-Host "[END] This is the end of our journey. Press Enter to exit the installer."
+$confirmation = Read-Host "[END] This is the end of our journey. Press Enter to exit the installer"
