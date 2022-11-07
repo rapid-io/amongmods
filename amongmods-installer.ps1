@@ -8,7 +8,9 @@
  Clones the installed Among Us, adds the ToU mod, and creates a shortcut on desktop.
  Optionally downloads and installs BetterCrewLink
 
- To run directly from powershell, try:
+ To run directly from powershell, try either:
+  iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
+  or
   Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1'))
 
 .NOTES
