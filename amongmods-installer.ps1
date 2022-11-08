@@ -14,13 +14,15 @@
   iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
   
 .NOTES
- Version:        2022-11-07.1
+ Version:        2022-11-08.1
  Author:         rapid
 
 .LINK
  https://github.com/rapid-io/amongmods
 #>
-$version = '2022-11-07.1'
+$version = '2022-11-08.1'
+
+Import-Module BitsTransfer
 
 function showBanner() {
     Write-Host ""
@@ -45,7 +47,7 @@ function scanSteam($Paths) {
         if (Test-Path -Path $Path  -PathType Leaf) {
             $Split = $Path.Split("\")
             $Paths.AmongUs = [string]($Split[0..($Split.count-2)] -join "\")
-            $Paths.TownOfUs = [string]($Split[0..($Split.count-3)] -join "\") + "\Among Us ToU"
+            $Paths.TownOfUs = [string]($Split[0..($Split.count-3)] -join "\") + "\Among Us ToooooU"
             $hits++
         }
     }
@@ -80,20 +82,16 @@ function infoFromGitHub([string]$repository,[string]$filepattern) {
 function downloadFile([string]$URL,[string]$destination) {
     Write-Host "[DL] From: " $URL
     Write-Host "[DL] To:   " $destination
-    $ProgressPreference = 'SilentlyContinue'
-
     try {
-        $WR = Invoke-WebRequest -Uri $URL -OutFile $destination -PassThru -UseBasicParsing #-Verbose
-        Write-Host "[DL]" $WR.RawContentLength "bytes received."
+        Start-BitsTransfer -DisplayName "Download" -ErrorAction Stop -Description $URL -Source $URL -Destination $destination
     }
     Catch {
-            Write-Host "[DL] Failed:" $($_.Exception.Response.StatusCode)
+            Write-Host "[DL] Failed:" $($_)
             return $false
     }
-    $ProgressPreference = 'Continue'
+    Write-Host "[DL]" (Get-Item $destination).Length "bytes downloaded"
     return $true
 }
-
 
 #"C:\Program Files (x86)\Steam\steamapps\common\Among Us ToU\BepInEx\plugins\TownOfUs.dll"
 function checkToU($Paths,$ToU) {
