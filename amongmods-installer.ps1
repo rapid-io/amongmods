@@ -47,7 +47,7 @@ function scanSteam($Paths) {
         if (Test-Path -Path $Path  -PathType Leaf) {
             $Split = $Path.Split("\")
             $Paths.AmongUs = [string]($Split[0..($Split.count-2)] -join "\")
-            $Paths.TownOfUs = [string]($Split[0..($Split.count-3)] -join "\") + "\Among Us ToooooU"
+            $Paths.TownOfUs = [string]($Split[0..($Split.count-3)] -join "\") + "\Among Us ToU"
             $hits++
         }
     }
