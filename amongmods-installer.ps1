@@ -208,7 +208,7 @@ function installBCL($BCL) {
     Write-Host "[Better Crew Link] Download finished, installing."
     Start-Process $filename
     $confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file"
-    Remove-Item $filename -Force -Verbose
+    Remove-Item -Path "$filename" -Force -Verbose
     Write-Host ""
     Write-Host "[Better Crew Link] Removed " $filename
     Write-Host ""
@@ -247,7 +247,7 @@ else {
         Write-Host "[MAIN] Town of Us is already installed with the current version:" $ToU.Version
     }
     else {
-        installToU -Paths $AU_Paths -ToU $ToU
+        $r = installToU -Paths $AU_Paths -ToU $ToU
     }
 
 
@@ -256,12 +256,12 @@ else {
         Write-Host ""
         Write-Host "[MAIN] Could not find a release for Better Crew Link. Skipping."
     }
-    elseif (checkBCL -BCL $BCL) {
+    elseif (0) { #checkBCL -BCL $BCL) {
         Write-Host ""
         Write-Host "[MAIN] Better Crew Link is already installed with the current version:" $BCL.Version
     }
     else {
-        installBCL -BCL $BCL
+        $r = installBCL -BCL $BCL
     }
 }
 
