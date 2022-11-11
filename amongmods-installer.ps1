@@ -256,7 +256,7 @@ else {
         Write-Host ""
         Write-Host "[MAIN] Could not find a release for Better Crew Link. Skipping."
     }
-    elseif (0) { #checkBCL -BCL $BCL) {
+    elseif (checkBCL -BCL $BCL) {
         Write-Host ""
         Write-Host "[MAIN] Better Crew Link is already installed with the current version:" $BCL.Version
     }
