@@ -196,7 +196,7 @@ function installBCL($BCL) {
         $confirmation = Read-Host "[Better Crew Link] Want it or not? [y/n]"
     }
 
-    $filename = "$($env:TEMP)\$($BCL.Filename)"
+    $filename = "$((Get-Item $env:TEMP).Fullname)\$($BCL.Filename)"
     # Download BetterCrewLink from Github to current directory
     $d = downloadFile -URL $BCL.URL -destination $filename
 
