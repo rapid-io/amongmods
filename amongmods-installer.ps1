@@ -14,13 +14,13 @@
   iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
   
 .NOTES
- Version:        2022-11-08.1
+ Version:        2022-11-11.1
  Author:         rapid
 
 .LINK
  https://github.com/rapid-io/amongmods
 #>
-$version = '2022-11-08.1'
+$version = '2022-11-11.1'
 
 Import-Module BitsTransfer
 
@@ -165,7 +165,7 @@ function installToU($Paths,$ToU) {
     $Shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($ShortcutFile)
     $Shortcut.TargetPath = $($Paths.TownOfUs) + "\Among Us.exe"
     $Shortcut.Save()
-
+   
     # Clean up 
     Write-Host "[Town of Us] Removing downloaded archive."
     Remove-Item $filePath -Force #-Verbose
@@ -196,8 +196,9 @@ function installBCL($BCL) {
         $confirmation = Read-Host "[Better Crew Link] Want it or not? [y/n]"
     }
 
+    $filename = "$($env:TEMP)\$($BCL.Filename)"
     # Download BetterCrewLink from Github to current directory
-    $d = downloadFile -URL $BCL.URL -destination "$(Get-Location)\$($BCL.Filename)"
+    $d = downloadFile -URL $BCL.URL -destination $filename
 
     if ($d -eq $false) {
         Write-Host "[Better Crew Link] Failed the download, aborting."
@@ -205,11 +206,11 @@ function installBCL($BCL) {
     }
 
     Write-Host "[Better Crew Link] Download finished, installing."
-    Start-Process $BCL.Filename
+    Start-Process $filename
     $confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file"
-    Remove-Item $BCL.Filename -Force -Verbose
+    Remove-Item $filename -Force -Verbose
     Write-Host ""
-    Write-Host "[Better Crew Link] Removed " $BCL.Filename
+    Write-Host "[Better Crew Link] Removed " $filename
     Write-Host ""
     return $true
 }
