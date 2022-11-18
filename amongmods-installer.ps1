@@ -14,13 +14,13 @@
   iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
   
 .NOTES
- Version:        2022-11-11.1
+ Version:        2022-11-14.1
  Author:         rapid
 
 .LINK
  https://github.com/rapid-io/amongmods
 #>
-$version = '2022-11-11.1'
+$version = '2022-11-14.1'
 
 Import-Module BitsTransfer
 
@@ -206,8 +206,9 @@ function installBCL($BCL) {
     }
 
     Write-Host "[Better Crew Link] Download finished, installing."
-    Start-Process $filename
-    $confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file"
+    Start-Process -Wait $filename
+    #$confirmation = Read-Host "[Better Crew Link] Wait for the installer to complete, and once BetterCrewLink starts, press Enter to remove the setup-file"
+    Write-Host "[Better Crew Link] Installation finished, removing the setup-file."
     Remove-Item -Path "$filename" -Force -Verbose
     Write-Host ""
     Write-Host "[Better Crew Link] Removed " $filename
