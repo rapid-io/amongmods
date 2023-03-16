@@ -14,13 +14,13 @@
   iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
   
 .NOTES
- Version:        2022-11-14.1
+ Version:        2023-03-16.0
  Author:         rapid
 
 .LINK
  https://github.com/rapid-io/amongmods
 #>
-$version = '2022-11-14.1'
+$version = '2023-03-16.0'
 
 Import-Module BitsTransfer
 
@@ -104,6 +104,24 @@ function checkToU($Paths,$ToU) {
     }
     return $false
 }
+
+#"C:\Program Files (x86)\Steam\steamapps\common\Among Us\GameAssembly.dll"
+function checkAU($Paths) {
+    $ToUdllpath = $Paths.TownofUs + "\GameAssembly.dll"
+    $AUdllpath = $Paths.AmongUs  + "\GameAssembly.dll"
+    if (Test-Path -Path $ToUdllpath) {
+        $ToUdllversion = (Get-Item $ToUdllpath).LastWriteTime.DateTime
+        $AUdllversion = (Get-Item $AUdllpath).LastWriteTime.DateTime
+        Write-Host ""
+        Write-Host "[Version] Among Us: " $AUdllversion
+        Write-Host "[Version]      ToU: " $ToUdllversion
+        if ($AUdllversion -eq $ToUdllversion) {
+            return $true
+        }
+    }
+    return $false
+}
+
 
 # https://github.com/eDonnes124/Town-Of-Us-R/releases/download/v3.4.0/ToU.v3.4.0.zip
 function installToU($Paths,$ToU) {
@@ -243,7 +261,7 @@ else {
         Write-Host ""
         Write-Host "[MAIN] Could not find a release for Town of Us. Skipping."
     }
-    elseif (checkToU -Paths $AU_Paths -ToU $ToU) {
+    elseif ((checkAU -Paths $AU_Paths) -and (checkToU -Paths $AU_Paths -ToU $ToU)) {
         Write-Host ""
         Write-Host "[MAIN] Town of Us is already installed with the current version:" $ToU.Version
     }
