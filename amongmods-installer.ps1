@@ -14,13 +14,13 @@
   iex (iwr "https://raw.githubusercontent.com/rapid-io/amongmods/main/amongmods-installer.ps1").Content
   
 .NOTES
- Version:        2023-03-16.0
+ Version:        2023-12-15.0
  Author:         rapid
 
 .LINK
  https://github.com/rapid-io/amongmods
 #>
-$version = '2023-03-16.0'
+$version = '2023-12-15.0'
 
 Import-Module BitsTransfer
 
