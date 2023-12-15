@@ -172,7 +172,7 @@ function installToU($Paths,$ToU) {
 
     Write-Host "[Town of Us] Moving unpacked files..."
     # Move all files from new dir, to the parent directory
-    $ToU_dir = "$($Paths.TownOfUs)\$(Get-ChildItem -Path $Paths.TownOfUs -Directory -Name -Include "ToU v*")"
+    $ToU_dir = "$($Paths.TownOfUs)\$(Get-ChildItem -Path $Paths.TownOfUs -Directory -Name -Include "ToU*")"
     Get-ChildItem -Path $ToU_dir | Move-Item -Destination $Paths.TownOfUs
     Write-Host "[Town of Us] ... Done!"
 
